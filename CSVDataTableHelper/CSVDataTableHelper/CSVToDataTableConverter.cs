@@ -12,11 +12,16 @@ namespace CSVDataTableHelper
     {
         string csvPath;
         Boolean isHeader;
-
-        public CSVToDataTableConverter(string csvPath,Boolean isHeader)
+        List<string> headerList;
+        Dictionary<string, int> headerMap;
+        char delimeter;
+        public CSVToDataTableConverter(string csvPath,Boolean isHeader,List<string> headerList,char delimeter)
         {
             this.csvPath = csvPath;
             this.isHeader = isHeader;
+            headerMap = new Dictionary<string, int>();
+            this.headerList = headerList;
+            this.delimeter = delimeter;
         }
 
         public DataTable getDataTableCSVFile()
@@ -24,19 +29,37 @@ namespace CSVDataTableHelper
             DataTable dataTable = new DataTable();
             try
             {
-                using(StreamReader sr = new StreamReader(this.csvPath))
+                
+                using (StreamReader sr = new StreamReader(this.csvPath))
                 {
                     if (this.isHeader)
                     {
-                        string[] headers = sr.ReadLine().Split(',');
+                        string[] headers = sr.ReadLine().Split(delimeter);
                         for(int i = 0; i < headers.Count(); i++)
                         {
-                            dataTable.Columns.Add(headers[i]);
+                            headerMap.Add(headers[i], i);
                         }
+
+                        if (headerList != null)
+                        {
+                            for (int i = 0; i < headerList.Count(); i++)
+                            {
+                                dataTable.Columns.Add(headerList[i]);
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < headers.Count(); i++)
+                            {
+                                dataTable.Columns.Add(headers[i]);
+                            }
+                        }
+                        
+
                     }
                     else
                     {
-                        string[] headers = sr.ReadLine().Split(',');
+                        string[] headers = sr.ReadLine().Split(delimeter);
                         for (int i = 0; i < headers.Count(); i++)
                         {
                             dataTable.Columns.Add();
@@ -45,12 +68,24 @@ namespace CSVDataTableHelper
 
                     while (!sr.EndOfStream)
                     {
-                        string[] rows = sr.ReadLine().Split(',');
+                        string[] rows = sr.ReadLine().Split(delimeter);
                         DataRow dr = dataTable.NewRow();
-                        for(int j = 0; j < rows.Count(); j++)
+                        if (headerList != null)
                         {
-                            dr[j] = rows[j];
+                            for (int j = 0; j < headerList.Count(); j++)
+                            {
+                                var key = headerList[j];
+                                dr[j] = rows[headerMap[key]];
+                            }
                         }
+                        else
+                        {
+                            for(int j = 0; j < rows.Count(); j++)
+                            {
+                                dr[j] = rows[j];
+                            }
+                        }
+                        
                         dataTable.Rows.Add(dr);
                     }
                 }

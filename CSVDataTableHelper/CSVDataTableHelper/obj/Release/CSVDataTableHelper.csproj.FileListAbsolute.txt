@@ -3,3 +3,8 @@ C:\Users\USER\source\repos\CSVDataTableHelper\CSVDataTableHelper\bin\Release\CSV
 C:\Users\USER\source\repos\CSVDataTableHelper\CSVDataTableHelper\obj\Release\CSVDataTableHelper.csprojAssemblyReference.cache
 C:\Users\USER\source\repos\CSVDataTableHelper\CSVDataTableHelper\obj\Release\CSVDataTableHelper.dll
 C:\Users\USER\source\repos\CSVDataTableHelper\CSVDataTableHelper\obj\Release\CSVDataTableHelper.pdb
+C:\Users\USER\source\repos\uiRepo\CSVDataTableHelper\CSVDataTableHelper\bin\Release\CSVDataTableHelper.dll
+C:\Users\USER\source\repos\uiRepo\CSVDataTableHelper\CSVDataTableHelper\bin\Release\CSVDataTableHelper.pdb
+C:\Users\USER\source\repos\uiRepo\CSVDataTableHelper\CSVDataTableHelper\obj\Release\CSVDataTableHelper.csprojAssemblyReference.cache
+C:\Users\USER\source\repos\uiRepo\CSVDataTableHelper\CSVDataTableHelper\obj\Release\CSVDataTableHelper.dll
+C:\Users\USER\source\repos\uiRepo\CSVDataTableHelper\CSVDataTableHelper\obj\Release\CSVDataTableHelper.pdb

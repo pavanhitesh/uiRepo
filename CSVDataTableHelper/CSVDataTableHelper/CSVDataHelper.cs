@@ -20,6 +20,14 @@ namespace CSVDataTableHelper
         [RequiredArgument]
         public InArgument<Boolean> IsHeader { get; set; }
 
+        [Category("Input")]
+        public InArgument<List<string>> HeaderList { get; set; }
+
+
+        [Category("Input")]
+        [RequiredArgument]
+        public InArgument<char> Delimeter { get; set; }
+
         [Category("Output")]
         public OutArgument<DataTable> ResultListItems { get; set; }
 
@@ -27,7 +35,9 @@ namespace CSVDataTableHelper
         {
             var csvPath = CSVPath.Get(context);
             var isHeader = IsHeader.Get(context);
-            CSVToDataTableConverter converter = new CSVToDataTableConverter(csvPath,isHeader);
+            char delimeter = Delimeter.Get(context);
+            List<string> headerList = HeaderList.Get(context);
+            CSVToDataTableConverter converter = new CSVToDataTableConverter(csvPath,isHeader, headerList,delimeter);
             ResultListItems.Set(context, converter.getDataTableCSVFile());
         }
     }
